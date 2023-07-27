@@ -35,15 +35,14 @@ public class megaController {
 	@RequestMapping("/omain")
 	public String omain(Model model, t_menu menu) {
 		List<t_menu> menus = new ArrayList<t_menu> ();
-		if(menu==null) {
+		List<List<t_menu>> menuGroups = new ArrayList<>();
+		List<t_category>cate = mapper.getCate();
+		int groupSize = 6;
+		if(menu.getCategory_seq()==0) {
 			menus = mapper.getAllMenus();
 		}else {
 			menus = mapper.getMenus(menu);
 		}
-		List<t_category>cate = mapper.getCate();
-		menus = mapper.getMenus(menu);
-		List<List<t_menu>> menuGroups = new ArrayList<>();
-		int groupSize = 6;
 		int menuSize = menus.size();
 		// 6개씩 메뉴를 담을 그룹의 갯수 구하는 구문
 		int groupCount = (int)Math.ceil((double)menuSize / groupSize);
